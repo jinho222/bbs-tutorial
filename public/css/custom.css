@@ -1,0 +1,20 @@
+.password_secret {
+	position: absolute;
+	top: 50%;
+	right: 10px;
+	transform: translateY(-50%);
+	cursor: pointer;
+}
+
+.table tr th:first-of-type {
+	text-align: center;
+}
+
+.pagination .page-item {
+	cursor: pointer;
+}
+
+.board-write-textarea {
+	resize: none;
+	height: 250px;
+}
