@@ -37,7 +37,7 @@ const BoardWrite = () => {
 						name="title"
 						value={form.title}
 						onChange={onFormChange}
-						/>
+						></input>
 					</div>
 					<div>
 						<label htmlFor="content" className="form-label">내용</label>
@@ -48,7 +48,7 @@ const BoardWrite = () => {
 						name="content"
 						value={form.content}
 						onChange={onFormChange}
-						/>
+						></textarea>
 						<p className="text-end mb-0 mt-2">
 							{`${contentLength}/500`}
 						</p>
