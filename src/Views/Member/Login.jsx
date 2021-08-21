@@ -1,16 +1,40 @@
+import { useMemo } from "react";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 
 const Login = () => {	
+	const history = useHistory();
+
+	/* status */
 	const [isPwSecret, setIsPwSecret] = useState(true);
 	const [form, setForm] = useState({
 		id: '',
 		pw: '',
 	});
-	const [invalidMsg, setinvalidMsg] = useState('');
-	
-	const history = useHistory();
+	const [isShowAlert, setIsShowAlert] = useState(false);
+	const invalidForm = useMemo(() => {
+		const res = {
+			status: false,
+			msg: '',
+		}
 
+		const { id, pw } = form;
+
+		if (!id) {
+			res.status = false;
+			res.msg = '아이디를 입력해주세요.';
+		} else if (!pw) {
+			res.status = false;
+			res.msg = '비밀번호를 입력해주세요.';
+		} else {
+			res.status = true;
+			res.msg = '';
+		}
+
+		return res;
+	}, [form]);
+
+	/* method */
 	const onFormChange = e => {
 		const { name, value } = e.target;
 		setForm({
@@ -20,22 +44,20 @@ const Login = () => {
 	}
 
 	const loginSubmit = () => {
-		if (!form.id) {
-			setinvalidMsg('아이디를 입력해주세요');
+		if (!invalidForm.status) {
+			setIsShowAlert(true);
 			return;
-		} else if (!form.pw) {
-			setinvalidMsg('비밀번호를 입력해주세요');
-			return;
-		} else {
-			history.push('/');
 		}
+
+		history.push('/');
 	};
 
+	/* template */
 	return (
-		<div className="container pt-4">
+		<>
 			<div className="card">
 				<div className="card-header">
-					<h2 className="mb-0">로그인</h2>
+					<h2>로그인</h2>
 				</div>
 				<div className="card-body">
 					<div className="mb-3">
@@ -69,9 +91,9 @@ const Login = () => {
 							alt="비밀번호 보기" />
 						</div>
 						{
-							invalidMsg && 
+							isShowAlert && 
 							<div className="alert alert-danger mt-4">
-								{invalidMsg}
+								{invalidForm.msg}
 							</div>
 						}
 					</div>
@@ -81,7 +103,7 @@ const Login = () => {
 					>로그인</button>
 				</div>
 			</div>
-		</div>
+		</>
 	);
 }
 
