@@ -18,3 +18,29 @@
 	resize: none;
 	height: 250px;
 }
+
+.input-error {
+	border-color: #dc3545 !important; 
+	box-shadow: 0 0 0 0.25rem #dc354525 !important;
+}
+
+.input-error-msg {
+	color: #dc3545;
+	font-weight: 500;
+}
+
+.btn-write {
+	position: absolute;
+	top: 50%;
+	right: 0;
+	transform: translateY(-50%);
+}
+
+.board-list-title {
+	cursor: pointer;
+}
+
+.board-list-title:hover {
+	text-decoration: underline;
+	font-weight: 500;
+}

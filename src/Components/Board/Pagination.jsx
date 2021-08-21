@@ -1,7 +1,7 @@
 const Pagination = () => {
 	return (
-		<nav className="d-flex justify-content-center">
-			<ul className="pagination">
+		<nav>
+			<ul className="pagination mb-0">
 				<li className="page-item">
 					<span className="page-link">&lt;</span>
 				</li>

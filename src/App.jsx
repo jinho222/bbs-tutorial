@@ -1,4 +1,4 @@
-import Header from "./Components/Common/Header";
+import Header from "./components/Common/Header";
 import {
 	BrowserRouter,
 	Switch,
@@ -9,6 +9,7 @@ import Login from "./views/Member/Login";
 import Signup from "./views/Member/Signup";
 import BoardList from "./views/Board/BoardList";
 import BoardWrite from "./views/Board/BoardWrite";
+import BoardView from "./views/Board/BoardView";
 
 const App = () => {
 	return (
@@ -21,6 +22,7 @@ const App = () => {
 					<Route path="/signup" component={Signup}/>
 					<Route path="/board-list" component={BoardList}/>
 					<Route path="/board-write" component={BoardWrite}/>
+					<Route path="/board-view/:postNo" component={BoardView}/>
 				</Switch>
 			</main>
 		</BrowserRouter>
