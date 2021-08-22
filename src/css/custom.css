@@ -42,5 +42,5 @@
 
 .board-list-title:hover {
 	text-decoration: underline;
-	font-weight: 500;
+	color: #666;
 }
