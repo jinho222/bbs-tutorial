@@ -1,6 +1,18 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const Home = () => {
+	const fetchData = () => {
+		fetch('//127.0.0.1:8080/post/list?pageNo=1')
+		.then(res => res.json())
+		.then(console.log)
+		.catch(console.log);
+	}
+
+	useEffect(() => {
+		fetchData();
+	}, []);
+
 	return (
 		<>
 			<div className="p-5 bg-light rounded-3">
