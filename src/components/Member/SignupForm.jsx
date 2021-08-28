@@ -15,9 +15,19 @@ export default function SignupForm({ signupSubmit }) {
 	/* method */
 	const onFormChange = e => {
 		const { name, value } = e.target;
+
+		let res = value;
+		if (['id', 'pw', 'pwRe'].includes(name)) {
+			// 아이디, 비밀번호에 한글 입력 불가
+			res = value.replace(/[^a-zA-Z0-9]/g, ''); 
+		} else if (name === 'tel') {
+			// 연락처에 숫자 제외 입력 불가
+			res = value.replace(/[^\d]/g, '');
+		}
+
 		setForm({
 			...form,
-			[name]: value,
+			[name]: res,
 		});
 	};
 
@@ -25,8 +35,8 @@ export default function SignupForm({ signupSubmit }) {
 			const { id, pw, pwRe, name, tel } = form;
 			if (!id) {
 				setErrorMsg('아이디를 입력해주세요.');
-			} else if (!pw) {
-				setErrorMsg('비밀번호를 입력해주세요.');
+			} else if (!pw || pw.length < 4) {
+				setErrorMsg('비밀번호를 4자 이상 입력해주세요.');
 			} else if (!pwRe) {
 				setErrorMsg('비밀번호 재확인을 입력해주세요.');
 			} else if (pw !== pwRe) {
@@ -35,12 +45,15 @@ export default function SignupForm({ signupSubmit }) {
 				setErrorMsg('이름을 입력해주세요.');
 			}	else if (!tel) {
 				setErrorMsg('연락처를 입력해주세요.');
+			} else if (!/^\d{9,11}$/.test(tel)) {
+				setErrorMsg('유효한 연락처 형식이 아닙니다.');
 			} else {
 				setErrorMsg('');
 				signupSubmit(form);
 			}
 	};
 
+	/* template */
 	return (
 		<>
 			{
@@ -76,7 +89,7 @@ export default function SignupForm({ signupSubmit }) {
 				<input
 				type="password"
 				className="form-control"
-				id="pwRe"
+				
 				placeholder="비밀번호를 다시 입력해주세요."
 				name="pwRe"
 				value={form.pwRe}
@@ -101,7 +114,7 @@ export default function SignupForm({ signupSubmit }) {
 				type="text"
 				className="form-control"
 				id="tel"
-				placeholder="연락처를 입력하세요."
+				placeholder="-를 제외하고 입력해주세요."
 				name="tel"
 				value={form.tel}
 				onChange={onFormChange}

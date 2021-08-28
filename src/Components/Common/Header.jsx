@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const Header = () => {
+export default function Header() {
 	return (
 		<nav className="navbar navbar-expand-md navbar-dark bg-primary">
 			<div className="container-fluid">
@@ -30,5 +30,3 @@ const Header = () => {
 		</nav>
 	)
 }
-
-export default Header;

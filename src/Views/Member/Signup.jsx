@@ -26,19 +26,17 @@ export default function Signup() {
 		
 		setIsLoading(true);
 		member.signup(formData).then(data => {
-			alert(data.message);
+			alert('회원가입에 성공했습니다.\n로그인하고 서비스를 이용해보세요.');
 			setIsLoading(false);
 			history.push('/login');
 		}).catch(e => {
-			if (e.response.status === 409) alert('이미 존재하는 아이디입니다.');
+			if (e.response && e.response.status === 409) alert('이미 존재하는 아이디입니다.');
 			else alert('서버상 에러입니다.\n잠시 후에 다시 시도해주세요.');
 			setIsLoading(false);
 		});
 	};
 
 	/* template */
-	if (isLoading) return (<Spinner></Spinner>)
-
 	return (
 		<>
 			<div className="card">
@@ -48,9 +46,12 @@ export default function Signup() {
 				<div className="card-body">
 					<SignupForm
 					signupSubmit={signupSubmit}
-					></SignupForm>
+					/>
 				</div>
 			</div>
+			{
+				isLoading && <Spinner/>
+			}
 		</>
 	);
 }

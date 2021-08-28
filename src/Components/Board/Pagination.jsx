@@ -1,4 +1,4 @@
-const Pagination = () => {
+export default function Pagination() {
 	return (
 		<nav>
 			<ul className="pagination mb-0">
@@ -21,5 +21,3 @@ const Pagination = () => {
 		</nav>
 	);
 };
-
-export default Pagination;

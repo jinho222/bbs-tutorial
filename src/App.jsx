@@ -11,7 +11,7 @@ import BoardList from "./views/Board/BoardList";
 import BoardWrite from "./views/Board/BoardWrite";
 import BoardView from "./views/Board/BoardView";
 
-const App = () => {
+export default function App() {
 	return (
 		<BrowserRouter>
 			<Header></Header>
@@ -28,5 +28,3 @@ const App = () => {
 		</BrowserRouter>
 	)
 }
-
-export default App;

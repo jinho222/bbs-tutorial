@@ -9,6 +9,10 @@ class Member extends Api {
 	async signup(params) {
 		return await this.requestPost('/member/signup', params);
 	}
+
+	async login(params) {
+		return await this.requestPost('/member/login', params);
+	}
 }
 
 export default Member;	

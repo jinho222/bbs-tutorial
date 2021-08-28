@@ -45,15 +45,23 @@
 	color: #666;
 }
 
-.spinner {
+.spinner-bg {
 	position: fixed;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(0, 0, 0, .7);
+	z-index: 10;
+	display: flex;
+}
+
+.spinner {
+	margin: auto;
 }
 
 .spinner .spinner-border {
 	width: 100px;
 	height: 100px;
-	border-width: 10px;
+	border-width: 15px;
 }
