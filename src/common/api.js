@@ -1,13 +1,14 @@
 import axios from 'axios';
 
 axios.defaults.baseURL = '//127.0.0.1:8080';
+axios.defaults.withCredentials = true;
 axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
 
 class Api {
  	requestBase(method, url, params) {
 		return axios({
-			method: method,
-			url: url,
+			method,
+			url,
 			data: params,
 		}).then(({ data }) => data)
 			.catch(err => Promise.reject(err));
@@ -18,7 +19,7 @@ class Api {
 	}
 	
 	async requestPost(url, params) {
-		return await this.requestBase('post', url, params);
+		return await this.requestBase('post', url, params);	
 	}
 	
 	async requestPut(url, params) {

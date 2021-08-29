@@ -7,7 +7,7 @@ import { login } from "../../store/member";
 
 const Login = () => {	
 	const history = useHistory();
-	const { basicInfo, isLoading } = useSelector(state => state.memberReducer);
+	const { basicInfo, isLoading, isError } = useSelector(state => state.member);
 	const dispatch = useDispatch();
 	
 	/* status */
@@ -21,15 +21,19 @@ const Login = () => {
 
 		[...formData.entries()].forEach(([key, data]) => console.log(`${key} => ${data}`));
 
-		dispatch(login(formData))
+		dispatch(login(formData)).then()
 	};
 
 	/* effect */
 	useEffect(() => {
-		if (!isLoading && Object.keys(basicInfo).length > 0) {
-			history.push('/')
+		if (!isLoading) {
+			if (isError) {
+				alert('아이디 또는 비밀번호가 잘못되었습니다.\n다시 시도해주세요.');
+			} else if (Object.keys(basicInfo).length > 0) { // 로그인 성공시
+				history.push('/')
+			}
 		}
-	}, [isLoading, basicInfo, history]);
+	}, [basicInfo, isLoading, isError, history]);
 
 	/* template */
 	return (

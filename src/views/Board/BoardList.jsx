@@ -28,7 +28,7 @@ const BoardList = () => {
 								<tr key={i}>
 									<th scope="row">1</th>
 									<td className="board-list-title" data-index={i} onClick={goToBoardView}>
-										제목이 입력됩니다.제목이 입력됩니다.제목이 입력됩니다.
+										<span>제목이 입력됩니다.제목이 입력됩니다.제목이 입력됩니다.</span>
 									</td>
 									<td>진호</td>
 									<td>12</td>

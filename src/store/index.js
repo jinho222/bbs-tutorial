@@ -3,7 +3,7 @@ import memberSlice from "./member";
 import logger from "redux-logger";
 
 const reducer = combineReducers({
-	memberReducer: memberSlice.reducer,
+	member: memberSlice.reducer,
 })
 
 const store = configureStore({

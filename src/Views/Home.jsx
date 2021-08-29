@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 export default function Home() {
-	const { basicInfo } = useSelector(state => state.memberReducer);
+	const { basicInfo } = useSelector(state => state.member);
 
 	return (
 		<>

@@ -1,21 +1,32 @@
 import { useMemo, useState } from "react";
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import Alert from "../../components/Common/Alert";
+import { getTodayDate, usePostContext } from "../../common/common";
+import Spinner from "../../components/Common/Spinner";
 
 const BoardWrite = () => {
+	/* hooks */
 	const history = useHistory();
+	const usePost = usePostContext();
+	const { basicInfo } = useSelector(state => state.member);
 
+	/* state */
 	const [form, setForm] = useState({
 		title: '',
 		content: '',
 	});
+	const [errorMsg, setErrorMsg] = useState('');
+	const [isLoading, setIsLoading] = useState(false);
 
+	/* memo */
 	const contentLength = useMemo(() => {
 		return form.content.length;
 	}, [form.content]);
 
+	/* method */
 	const onFormChange = e => {
 		const { name, value } = e.target;
-
 		setForm({
 			...form,
 			[name]: value,
@@ -27,6 +38,45 @@ const BoardWrite = () => {
 		if (!isCancel) return;
 		history.push('/board-list');
 	};
+	
+	const submitBoard = () => {
+		const { title, content } = form;
+		const { _id, id, name } = basicInfo;
+		const formData = new FormData();
+		formData.append('title', title);
+		formData.append('content', content);
+		formData.append('author_idx', _id);
+		formData.append('author_id', id);
+		formData.append('author_name', name);
+		formData.append('date', getTodayDate());
+
+		[...formData.entries()].forEach(([key, value]) => console.log(`${key}->${value}`))
+
+		setIsLoading(true);
+		usePost.addPost(formData).then(res => {
+			console.log(res);
+			alert('게시물이 등록되었습니다.');
+			setIsLoading(false);
+			history.push('/board-list');
+		}).catch(e => {
+			console.log(e);
+			setIsLoading(false);
+			alert('서버상 오류가 발생했습니다.\n잠시 후 다시 시도해주세요.');
+		})
+	}
+
+	const onSubmit = () => {
+		console.log('submit');
+		const { title, content } = form;
+		if (!title) {
+			setErrorMsg('제목을 입력해주세요.');
+		} else if (!content) {
+			setErrorMsg('내용을 입력해주세요.');
+		} else {
+			setErrorMsg('');
+			submitBoard();
+		}
+	}
 
 
   return (
@@ -36,6 +86,10 @@ const BoardWrite = () => {
 					<h2>글쓰기</h2>
 				</div>
 				<div className="card-body">
+					{
+						errorMsg.length > 0 &&
+						<Alert msg={errorMsg}></Alert>
+					}
 					<div className="mb-3">
 						<label htmlFor="title" className="form-label">제목</label>
 						<input
@@ -72,8 +126,12 @@ const BoardWrite = () => {
 				>목록</button>
 				<button
 				className="btn btn-primary ms-2"
+				onClick={onSubmit}
 				>등록</button>
 			</div>
+			{
+				isLoading && <Spinner></Spinner>
+			}
 		</>
 	);
 };
