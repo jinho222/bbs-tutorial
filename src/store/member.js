@@ -18,6 +18,11 @@ const memberSlice = createSlice({
 		isLoading: false,
 		isError: false,
 	},
+	reducers: {
+		sessionLogin(state, action) {
+			state.basicInfo = action.payload;
+		}
+	},
 	extraReducers: builder => {
 		builder
 		.addCase(login.pending, (state, action) => {
@@ -28,6 +33,10 @@ const memberSlice = createSlice({
 			state.basicInfo = action.payload;
 			state.isLoading = false;
 			state.isError = false;
+
+			/* sessionStorage */
+			console.log(JSON.stringify(state.basicInfo));
+			sessionStorage.setItem('basicInfo', JSON.stringify(state.basicInfo));
 		})
 		.addCase(login.rejected, (state, action) => {
 			state.isLoading = false;
@@ -36,4 +45,5 @@ const memberSlice = createSlice({
 	}
 });
 
+export const { sessionLogin } = memberSlice.actions;
 export default memberSlice;

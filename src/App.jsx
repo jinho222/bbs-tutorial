@@ -12,13 +12,24 @@ import BoardWrite from "./views/Board/BoardWrite";
 import BoardView from "./views/Board/BoardView";
 import React from "react";
 import Post from "./common/post";
+import { useSelector } from "react-redux";
+import AuthRoute from "./components/Common/AuthRoute";
+import { useMemo } from "react";
 
 const post = new Post();
 
 export const PostContext = React.createContext(null);
 
 export default function App() {
-	
+	/* hooks */
+	const { basicInfo } = useSelector(state => state.member);
+
+	/* memo */
+	const isLogin = useMemo(() => {
+		return Object.keys(basicInfo).length > 0
+	}, [basicInfo]);
+
+
 	return (
 		<PostContext.Provider value={post}>
 			<BrowserRouter>
@@ -29,8 +40,8 @@ export default function App() {
 						<Route path="/login" component={Login}/>
 						<Route path="/signup" component={Signup}/>
 						<Route path="/board-list" component={BoardList}/>
-						<Route path="/board-write" component={BoardWrite}/>
-						<Route path="/board-view/:postNo" component={BoardView}/>
+						<AuthRoute path="/board-write" component={BoardWrite} auth={isLogin}/>
+						<AuthRoute path="/board-view/:postNo" component={BoardView} auth={isLogin}/>
 					</Switch>
 				</main>
 			</BrowserRouter>
