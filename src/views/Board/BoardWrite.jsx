@@ -8,7 +8,7 @@ import Spinner from "../../components/Common/Spinner";
 const BoardWrite = () => {
 	/* hooks */
 	const history = useHistory();
-	const usePost = usePostContext();
+	const postCtx = usePostContext();
 	const { basicInfo } = useSelector(state => state.member);
 
 	/* state */
@@ -53,7 +53,7 @@ const BoardWrite = () => {
 		[...formData.entries()].forEach(([key, value]) => console.log(`${key}->${value}`))
 
 		setIsLoading(true);
-		usePost.addPost(formData).then(res => {
+		postCtx.addPost(formData).then(res => {
 			console.log(res);
 			alert('게시물이 등록되었습니다.');
 			setIsLoading(false);

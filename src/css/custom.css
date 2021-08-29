@@ -60,3 +60,7 @@
 	height: 100px;
 	border-width: 15px;
 }
+.page-content {
+	font-family: "IBM Plex Sans KR", sans-serif;
+	border-top: 1px solid #666;
+}

@@ -14,8 +14,10 @@ class Api {
 			.catch(err => Promise.reject(err));
 	}
 	
-	async requestGet(url, params) {
-		return await this.requestBase('get', url, params);
+	async requestGet(url, params = {}) {
+		const paramsString = new URLSearchParams(params).toString();
+		const fullUrl = `${url}?${paramsString}`;
+		return await this.requestBase('get', fullUrl);
 	}
 	
 	async requestPost(url, params) {
