@@ -172,7 +172,7 @@ export default function Signup() {
 				</div>
 			</div>
 			{
-				isLoading && <Spinner/>
+				isLoading && <Spinner type="full"/>
 			}
 		</>
 	);

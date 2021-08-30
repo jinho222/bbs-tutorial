@@ -146,7 +146,7 @@ const BoardWrite = () => {
 				>등록</button>
 			</div>
 			{
-				isLoading && <Spinner></Spinner>
+				isLoading && <Spinner type="full"></Spinner>
 			}
 		</>
 	);

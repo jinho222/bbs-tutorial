@@ -18,7 +18,7 @@ export default function Pagination({
 
 	const changeBlock = params => {
 		if (params === 'prev') {
-			const floored = Math.floor((pageNo - 1) / postsPerPage) * 5;
+			const floored = Math.floor((pageNo - 1) / postsPerPage) * postsPerPage;
 			if (floored === 0) {
 				alert('처음 페이지입니다.');
 				return;

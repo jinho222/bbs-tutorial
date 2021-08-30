@@ -109,7 +109,7 @@ const Login = () => {
 				</div>
 			</div>
 			{
-				isLoading && <Spinner></Spinner>
+				isLoading && <Spinner type="full"></Spinner>
 			}
 		</>
 	);
