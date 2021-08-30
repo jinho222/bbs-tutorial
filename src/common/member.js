@@ -13,6 +13,10 @@ class Member extends Api {
 	async login(params) {
 		return await this.requestPost('/member/login', params);
 	}
+
+	async logout(params) {
+		return await this.requestPost('/member/logout', params);
+	}
 }
 
 export default Member;	

@@ -14,7 +14,6 @@ import React from "react";
 import Post from "./common/post";
 import { useSelector } from "react-redux";
 import AuthRoute from "./components/Common/AuthRoute";
-import { useMemo } from "react";
 
 const post = new Post();
 
@@ -25,9 +24,7 @@ export default function App() {
 	const { basicInfo } = useSelector(state => state.member);
 
 	/* memo */
-	const isLogin = useMemo(() => {
-		return Object.keys(basicInfo).length > 0
-	}, [basicInfo]);
+	const isLogin = Object.keys(basicInfo).length > 0
 
 
 	return (

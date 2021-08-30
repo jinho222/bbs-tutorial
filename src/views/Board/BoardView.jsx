@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Link, useHistory, useParams } from "react-router-dom";
 import { usePostContext } from "../../common/common";
 import Spinner from "../../components/Common/Spinner";
 
@@ -8,17 +9,33 @@ const BoardView = () => {
 	/* hooks */
 	const params = useParams();
 	const postCtx = usePostContext();
+	const history = useHistory();
+	const { basicInfo } = useSelector(state => state.member);
 
 	/* state */
 	const [isLoading, setIsLoading] = useState(true);
-	const [page, setPage] = useState({});
+	const [post, setPost] = useState({});
+
+	/* methods */
+	const onDelete = () => {
+		const isCancel = window.confirm('정말 삭제하시겠습니까?');
+		if (!isCancel) return;
+		const formData = new FormData();
+		formData.append('_id', post._id);
+		postCtx.deletePost(formData).then(res => {
+			alert('게시물이 삭제되었습니다.');
+			history.push('/board-list');
+		}).catch(e => {
+			console.log(e);
+			alert('서버상 오류가 발생했습니다.\n잠시 후 다시 시도해주세요.');
+		})
+	}
 
 	/* effect */
 	useEffect(() => {
 		setIsLoading(true);
-		postCtx.getPageDetail({...params}).then(res => {
-			console.log(res);
-			setPage(res);
+		postCtx.getPost({...params}).then(res => {
+			setPost(res);
 			setIsLoading(false);
 		}).catch(e => {
 			console.log(e);
@@ -31,21 +48,38 @@ const BoardView = () => {
 	return (
 		<>
 			{
-				(Object.keys(page).length > 0) &&
+				(Object.keys(post).length > 0) &&
 				<>
 					<div className="card">
 						<article className="card-body">
-							<h2 className="card-title">{ page.title }</h2>
+							<h2 className="card-title">{ post.title }</h2>
 							<p className="d-flex justify-content-between mt-1 align-items-center text-secondary">
-								<span >{page.author_name}</span>
-								<span>{page.date}</span>
+								<span >{post.author_name}</span>
+								<span>{post.date}</span>
 							</p>
-							<pre className="card-text page-content pt-3">{ page.content }</pre>
+							<pre className="card-text post-content pt-3">{ post.content }</pre>
 						</article>
 					</div>
 					<div className="d-flex justify-content-end mt-2">
+						{
+							(basicInfo.id === post.author_id) &&
+							<>
+								<Link
+								className="btn btn-success"
+								to={{
+									pathname: '/board-write',
+									state: { 
+										status: 'edit',
+										post: {...post},
+									},
+								}}>수정</Link>
+								<button
+								className="btn btn-danger ms-1"
+								onClick={onDelete}>삭제</button>
+							</>
+						}
 						<Link
-						className="btn btn-secondary"
+						className="btn btn-secondary ms-1"
 						to="/board-list">목록</Link>
 					</div>
 				</>

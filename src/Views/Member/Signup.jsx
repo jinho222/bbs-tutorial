@@ -3,12 +3,15 @@ import { useHistory } from "react-router-dom";
 import Spinner from "../../components/Common/Spinner";
 import Member from "../../common/member";
 import Alert from '../../components/Common/Alert';
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const member = new Member();
 
 export default function Signup() {	
 	/* hooks */
 	const history = useHistory();
+	const { basicInfo } = useSelector(state => state.member);
 
 	/* status */
 	const [isLoading, setIsLoading] = useState(false);
@@ -85,6 +88,13 @@ export default function Signup() {
 		});
 	};
 
+	/* effects */
+	useEffect(() => {
+		// 로그인한 회원은 접근 불가
+		if (Object.keys(basicInfo).length > 0) {
+			history.go(-1);
+		}
+	}, [basicInfo, history]);
 
 	/* template */
 	return (

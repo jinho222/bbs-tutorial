@@ -10,12 +10,20 @@ class Post extends Api {
 		return await this.requestGet('/post/list', params);
 	}
 	
-	async getPageDetail(params) {
-		return await this.requestGet('/post/detail', params);
+	async getPost(params) {
+		return await this.requestGet('/post', params);
 	}
 
 	async addPost(params) {
-		return await this.requestPost('/post/add', params);
+		return await this.requestPost('/post', params);
+	}
+
+	async updatePost(params) {
+		return await this.requestPut('/post', params);
+	}
+
+	async deletePost(params) {
+		return await this.requestDelete('/post', params);
 	}
 
 }

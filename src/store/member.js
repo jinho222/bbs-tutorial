@@ -11,6 +11,14 @@ export const login = createAsyncThunk(
 	}
 )
 
+export const logout = createAsyncThunk(
+	'logout',	
+	async (params) => {
+		const res = await member.logout(params)
+		return res;
+	}
+)
+
 const memberSlice = createSlice({
 	name: 'member',
 	initialState: {
@@ -35,10 +43,25 @@ const memberSlice = createSlice({
 			state.isError = false;
 
 			/* sessionStorage */
-			console.log(JSON.stringify(state.basicInfo));
 			sessionStorage.setItem('basicInfo', JSON.stringify(state.basicInfo));
 		})
 		.addCase(login.rejected, (state, action) => {
+			state.isLoading = false;
+			state.isError = true;
+		})
+		.addCase(logout.pending, (state, action) => {
+			state.isLoading = true;
+			state.isError = false;
+		})
+		.addCase(logout.fulfilled, (state, action) => {
+			state.basicInfo = {};
+			state.isLoading = false;
+			state.isError = false;
+			
+			/* sessionStorage */
+			sessionStorage.removeItem('basicInfo');
+		})
+		.addCase(logout.rejected, (state, action) => {
 			state.isLoading = false;
 			state.isError = true;
 		})

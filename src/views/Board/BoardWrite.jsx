@@ -1,13 +1,15 @@
 import { useMemo, useState } from "react";
 import { useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import Alert from "../../components/Common/Alert";
 import { getTodayDate, usePostContext } from "../../common/common";
 import Spinner from "../../components/Common/Spinner";
+import { useEffect } from "react";
 
 const BoardWrite = () => {
 	/* hooks */
 	const history = useHistory();
+	const location = useLocation();
 	const postCtx = usePostContext();
 	const { basicInfo } = useSelector(state => state.member);
 
@@ -38,31 +40,37 @@ const BoardWrite = () => {
 		if (!isCancel) return;
 		history.push('/board-list');
 	};
-	
-	const submitBoard = () => {
+
+	const submitBoard = async () => {
 		const { title, content } = form;
 		const { _id, id, name } = basicInfo;
+		const { status, post } = location.state;
 		const formData = new FormData();
 		formData.append('title', title);
 		formData.append('content', content);
-		formData.append('author_idx', _id);
 		formData.append('author_id', id);
 		formData.append('author_name', name);
-		formData.append('date', getTodayDate());
-
-		[...formData.entries()].forEach(([key, value]) => console.log(`${key}->${value}`))
-
+		
 		setIsLoading(true);
-		postCtx.addPost(formData).then(res => {
-			console.log(res);
-			alert('게시물이 등록되었습니다.');
+		try {
+			if (status === 'edit') {
+				formData.append('_id', post._id);
+				await postCtx.updatePost(formData);
+			} else {
+				formData.append('author_idx', _id);
+				formData.append('date', getTodayDate());
+				await postCtx.addPost(formData)
+			}
+			const msg = `게시물이 ${status === 'edit' ? '수정' : '등록'}되었습니다.`;
+			alert(msg);
 			setIsLoading(false);
-			history.push('/board-list');
-		}).catch(e => {
+			if (status === 'edit') history.push(`/board-view/${post._id}`);
+			else history.push('/board-list');
+		} catch (e) {
 			console.log(e);
 			setIsLoading(false);
 			alert('서버상 오류가 발생했습니다.\n잠시 후 다시 시도해주세요.');
-		})
+		}
 	}
 
 	const onSubmit = () => {
@@ -78,7 +86,15 @@ const BoardWrite = () => {
 		}
 	}
 
+	/* effects */
+	useEffect(() => {
+		const { status, post } = location.state;
+		if (status !== 'edit') return;
+		// 글 수정인 경우에만
+		setForm({...post});
+	}, [location]);
 
+	/* template */
   return (
 		<>
 			<div className="card">

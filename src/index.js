@@ -7,11 +7,15 @@ import store from './store';
 import { Provider } from 'react-redux';
 import { sessionLogin } from './store/member';
 
-// 새로고침시 실행
-if (sessionStorage.getItem('basicInfo')) {
-	const parsed = JSON.parse(sessionStorage.getItem('basicInfo'));
-	store.dispatch(sessionLogin(parsed));
+// 새로고침시 세션 정보를 가져오는 함수
+function loadSessionInfo() {
+	if (sessionStorage.getItem('basicInfo')) {
+		const parsed = JSON.parse(sessionStorage.getItem('basicInfo'));
+		store.dispatch(sessionLogin(parsed));
+	}
 }
+
+loadSessionInfo();
 
 ReactDOM.render(
 	<Provider store={store}>

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { usePostContext } from '../../common/common';
 import Spinner from '../../components/Common/Spinner';
+import { useCallback } from 'react';
 
 const BoardList = () => {
 	/* hooks */
@@ -14,11 +15,14 @@ const BoardList = () => {
 	const [postList, setPostList] = useState([]);
 	const [pageOption, setPageOption] = useState({});
 
-	/* effect */
-	useEffect(() => {
-		const params = {
-			pageNo: 1,
-		}
+	/* method */
+	const goToBoardView = e => {
+		const { index } = e.target.dataset;
+		history.push(`/board-view/${index}`);
+	}
+
+	const fetchBoardList = useCallback((pageNo = 1) => {
+		const params = { pageNo };
 		setIsLoading(true);
 		postCtx.getList(params).then(res => {
 			console.log(res);
@@ -32,11 +36,10 @@ const BoardList = () => {
 		});
 	}, [postCtx]);
 
-	/* method */
-	const goToBoardView = e => {
-		const { index } = e.target.dataset;
-		history.push(`/board-view/${index}`);
-	}
+	/* effect */
+	useEffect(() => {
+		fetchBoardList();
+	}, [postCtx, fetchBoardList]);
 
 	if (isLoading) return <Spinner></Spinner>;
 
@@ -72,11 +75,14 @@ const BoardList = () => {
 				<div className="d-flex justify-content-center position-relative">
 				{
 					postList.length > 0 &&
-					<Pagination/>
+					<Pagination {...pageOption} fetchBoardList={fetchBoardList}/>
 				}
 				<Link
 				className="btn btn-primary btn-write"
-				to="/board-write"
+				to={{
+					pathname: '/board-write',
+					state: { status: 'write' },
+				}}
 				>글쓰기</Link>
 			</div>
 		</>
