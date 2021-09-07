@@ -19,13 +19,25 @@ export const logout = createAsyncThunk(
 	}
 )
 
+const initialState = {
+	basicInfo: {},
+	isLoading: false,
+	isError: false,
+}
+
+// 새로고침시 세션 정보를 가져오는 함수
+function loadSessionInfo() {
+	if (sessionStorage.getItem('basicInfo')) {
+		const parsed = JSON.parse(sessionStorage.getItem('basicInfo'));
+		initialState.basicInfo = parsed;
+	}
+}
+
+loadSessionInfo();
+
 const memberSlice = createSlice({
 	name: 'member',
-	initialState: {
-		basicInfo: {},
-		isLoading: false,
-		isError: false,
-	},
+	initialState,
 	reducers: {
 		sessionLogin(state, action) {
 			state.basicInfo = action.payload;
