@@ -45,46 +45,46 @@ const BoardList = () => {
 
 	return (
 		<>
-			<table className="table">
-					<thead>
-						<tr>
-							<th scope="col">No.</th>
-							<th scope="col">제목</th>
-							<th scope="col">작성자</th>
-							<th scope="col">날짜</th>
-						</tr>
-					</thead>
-					<tbody>
-						{
-							(postList.length > 0 ) &&
-							postList.map(post => {
-								return (
-									<tr key={post._id}>
-										<th scope="row">{post._id}</th>
-										<td className="board-list-title" data-index={post._id} onClick={goToBoardView}>
-											{post.title}
-										</td>
-										<td>{post.author_name}</td>
-										<td>{post.date}</td>
-									</tr>
-								)
-							})
-						}
-					</tbody>
-				</table>
-				<div className="d-flex justify-content-center position-relative">
-				{
-					postList.length > 0 &&
-					<Pagination {...pageOption} fetchBoardList={fetchBoardList}/>
-				}
-				<Link
-				className="btn btn-primary btn-write"
-				to={{
-					pathname: '/board-write',
-					state: { status: 'write' },
-				}}
-				>글쓰기</Link>
-			</div>
+		<table className="table">
+				<thead>
+					<tr>
+						<th scope="col">No.</th>
+						<th scope="col">제목</th>
+						<th scope="col">작성자</th>
+						<th scope="col">날짜</th>
+					</tr>
+				</thead>
+				<tbody>
+					{
+						(postList.length > 0 ) &&
+						postList.map(post => {
+							return (
+								<tr key={post._id}>
+									<th scope="row">{post._id}</th>
+									<td className="board-list-title" data-index={post._id} onClick={goToBoardView}>
+										{post.title}
+									</td>
+									<td>{post.author_name}</td>
+									<td>{post.date}</td>
+								</tr>
+							)
+						})
+					}
+				</tbody>
+			</table>
+			<div className="d-flex justify-content-center position-relative">
+			{
+				postList.length > 0 &&
+				<Pagination {...pageOption} fetchBoardList={fetchBoardList}/>
+			}
+			<Link
+			className="btn btn-primary btn-write"
+			to={{
+				pathname: '/board-write',
+				state: { status: 'write' },
+			}}
+			>글쓰기</Link>
+		</div>
 		</>
 	)
 };

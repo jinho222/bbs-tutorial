@@ -10,11 +10,10 @@ export default function Header() {
 	const location = useLocation();		
 
 	/* method */
-	const onLogout = () => {
-		dispatch(logout()).then(() => {
-			alert('로그아웃되었습니다.');
-			history.push('/');
-		}).catch(e => console.log(e));
+	const onLogout = async () => {
+		await dispatch(logout())
+		alert('로그아웃되었습니다.');
+		history.push('/');
 	};
 	
 	const isLogin = Object.keys(basicInfo).length > 0;
@@ -27,7 +26,7 @@ export default function Header() {
 				<h1 className="d-flex">
 					<Link className="navbar-brand" to="/">BBS</Link>
 				</h1>
-				<button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
 					<span className="navbar-toggler-icon"></span>
 				</button>
 				<div className="collapse navbar-collapse" id="navbarNav">

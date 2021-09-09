@@ -65,52 +65,52 @@ const Login = () => {
 	/* template */
 	return (
 		<>
-			<div className="card">
-				<div className="card-header">
-					<h2>로그인</h2>
+		<div className="card">
+			<div className="card-header">
+				<h2>로그인</h2>
+			</div>
+			<div className="card-body">
+				{ errorMsg.length > 0 && <Alert msg={errorMsg}></Alert> }
+				<div className="mb-3">
+					<label htmlFor="id" className="form-label">아이디</label>
+					<input
+					type="text"
+					className="form-control"
+					id="id"
+					placeholder="아이디를 입력하세요."
+					name="id"
+					value={form.id}
+					onChange={onFormChange}
+					/>
 				</div>
-				<div className="card-body">
-					{ errorMsg.length > 0 && <Alert msg={errorMsg}></Alert> }
-					<div className="mb-3">
-						<label htmlFor="id" className="form-label">아이디</label>
+				<div className="mb-3">
+					<label htmlFor="pw" className="form-label">비밀번호</label>
+					<div className="position-relative">
 						<input
-						type="text"
+						type={isPwSecret ? "password" : "text"}
 						className="form-control"
-						id="id"
-						placeholder="아이디를 입력하세요."
-						name="id"
-						value={form.id}
+						id="pw"
+						placeholder="비밀번호를 입력하세요."
+						name="pw"
+						value={form.pw}
 						onChange={onFormChange}
 						/>
+						<img 
+						className="password_secret"
+						src={isPwSecret ? "/images/eye-on.png" : "/images/eye-off.png"}
+						onClick={() => setIsPwSecret(!isPwSecret)}
+						alt="비밀번호 보기" />
 					</div>
-					<div className="mb-3">
-						<label htmlFor="pw" className="form-label">비밀번호</label>
-						<div className="position-relative">
-							<input
-							type={isPwSecret ? "password" : "text"}
-							className="form-control"
-							id="pw"
-							placeholder="비밀번호를 입력하세요."
-							name="pw"
-							value={form.pw}
-							onChange={onFormChange}
-							/>
-							<img 
-							className="password_secret"
-							src={isPwSecret ? "/images/eye-on.png" : "/images/eye-off.png"}
-							onClick={() => setIsPwSecret(!isPwSecret)}
-							alt="비밀번호 보기" />
-						</div>
-					</div>
-					<button
-					className="btn btn-primary d-block mx-auto"
-					onClick={onSubmit}
-					>로그인</button>
 				</div>
+				<button
+				className="btn btn-primary d-block mx-auto"
+				onClick={onSubmit}
+				>로그인</button>
 			</div>
-			{
-				isLoading && <Spinner type="full"></Spinner>
-			}
+		</div>
+		{
+			isLoading && <Spinner type="full"></Spinner>
+		}
 		</>
 	);
 }

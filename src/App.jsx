@@ -26,7 +26,6 @@ export default function App() {
 	/* memo */
 	const isLogin = Object.keys(basicInfo).length > 0
 
-
 	return (
 		<PostContext.Provider value={post}>
 			<BrowserRouter>

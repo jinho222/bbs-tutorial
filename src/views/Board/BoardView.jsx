@@ -47,43 +47,43 @@ const BoardView = () => {
 
 	return (
 		<>
-			{
-				(Object.keys(post).length > 0) &&
-				<>
-					<div className="card">
-						<article className="card-body">
-							<h2 className="card-title">{ post.title }</h2>
-							<p className="d-flex justify-content-between mt-1 align-items-center text-secondary">
-								<span >{post.author_name}</span>
-								<span>{post.date}</span>
-							</p>
-							<pre className="card-text post-content pt-3">{ post.content }</pre>
-						</article>
-					</div>
-					<div className="d-flex justify-content-end mt-2">
-						{
-							(basicInfo.id === post.author_id) &&
-							<>
-								<Link
-								className="btn btn-success"
-								to={{
-									pathname: '/board-write',
-									state: { 
-										status: 'edit',
-										post: {...post},
-									},
-								}}>수정</Link>
-								<button
-								className="btn btn-danger ms-1"
-								onClick={onDelete}>삭제</button>
-							</>
-						}
-						<Link
-						className="btn btn-secondary ms-1"
-						to="/board-list">목록</Link>
-					</div>
-				</>
-			}
+		{
+			(Object.keys(post).length > 0) &&
+			<>
+			<div className="card">
+				<article className="card-body">
+					<h2 className="card-title">{ post.title }</h2>
+					<p className="d-flex justify-content-between mt-1 align-items-center text-secondary">
+						<span >{post.author_name}</span>
+						<span>{post.date}</span>
+					</p>
+					<pre className="card-text post-content pt-3">{ post.content }</pre>
+				</article>
+			</div>
+			<div className="d-flex justify-content-end mt-2">
+				{
+					(basicInfo.id === post.author_id) &&
+					<>
+					<Link
+					className="btn btn-success"
+					to={{
+						pathname: '/board-write',
+						state: { 
+							status: 'edit',
+							post: {...post},
+						},
+					}}>수정</Link>
+					<button
+					className="btn btn-danger ms-1"
+					onClick={onDelete}>삭제</button>
+					</>
+				}
+				<Link
+				className="btn btn-secondary ms-1"
+				to="/board-list">목록</Link>
+			</div>
+			</>
+		}
 		</>
 	);
 };
