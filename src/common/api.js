@@ -1,35 +1,60 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = '//127.0.0.1:8080';
-axios.defaults.withCredentials = true;
-axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
-
 class Api {
- 	requestBase(method, url, params) {
+	constructor() {
+		this.baseURL = process.env.NODE_ENV === 'production'
+			? '//bbs-server.herokuapp.com' // 배포용
+			: '//localhost:8080'; // 개발용
+	}
+
+ 	requestBase({ method, url, params, data }) {
 		return axios({
 			method,
 			url,
-			data: params,
+			baseURL: this.baseURL,
+			params,
+			data,
+			withCredentials: true,
+			headers: {
+				post: {
+					'Content-Type': 'multipart/form-data',
+				},
+			},
+			timeout: 8000,
 		}).then(({ data }) => data)
 			.catch(err => Promise.reject(err));
 	}
 	
 	async requestGet(url, params = {}) {
-		const paramsString = new URLSearchParams(params).toString();
-		const fullUrl = `${url}?${paramsString}`;
-		return await this.requestBase('get', fullUrl);
+		return await this.requestBase({
+			method: 'get',
+			url,
+			params,
+		});
 	}
 	
-	async requestPost(url, params) {
-		return await this.requestBase('post', url, params);	
+	async requestPost(url, data) {
+		return await this.requestBase({
+			method: 'post',
+			url,
+			data,
+		});
 	}
 	
-	async requestPut(url, params) {
-		return await this.requestBase('put', url, params);
+	async requestPut(url, data) {
+		return await this.requestBase({
+			method: 'put',
+			url,
+			data,
+		});
 	}
 	
-	async requestDelete(url, params) {
-		return await this.requestBase('delete', url, params);
+	async requestDelete(url, data) {
+		return await this.requestBase({
+			method: 'delete',
+			url,
+			data,
+		});
 	}
 }
 

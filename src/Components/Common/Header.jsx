@@ -11,7 +11,7 @@ export default function Header() {
 
 	/* method */
 	const onLogout = async () => {
-		await dispatch(logout())
+		await dispatch(logout());
 		alert('로그아웃되었습니다.');
 		history.push('/');
 	};
@@ -19,7 +19,7 @@ export default function Header() {
 	const isLogin = Object.keys(basicInfo).length > 0;
 	
 	const checkActive = params => location.pathname === params ? 'active' : '';
-	
+
 	return (
 		<nav className="navbar navbar-expand-md navbar-dark bg-primary">
 			<div className="container-fluid">

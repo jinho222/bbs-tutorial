@@ -51,6 +51,8 @@ const Login = () => {
 		});
 	};
 
+	const onEnterPress = e => { if (e.key === 'Enter') onSubmit() } ;
+
 	/* effect */
 	useEffect(() => {
 		if (!isLoading) {
@@ -94,6 +96,7 @@ const Login = () => {
 						name="pw"
 						value={form.pw}
 						onChange={onFormChange}
+						onKeyPress={onEnterPress}
 						/>
 						<img 
 						className="password_secret"

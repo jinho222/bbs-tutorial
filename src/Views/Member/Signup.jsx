@@ -88,6 +88,8 @@ export default function Signup() {
 		});
 	};
 
+	const onEnterPress = e => { if (e.key === 'Enter') onFormSubmit() } ;
+
 	/* effects */
 	useEffect(() => {
 		// 로그인한 회원은 접근 불가
@@ -163,6 +165,7 @@ export default function Signup() {
 						name="tel"
 						value={form.tel}
 						onChange={onFormChange}
+						onKeyPress={onEnterPress}
 						/>
 					</div>
 					<button
