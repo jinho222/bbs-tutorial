@@ -88,7 +88,7 @@ export default function Signup() {
 		});
 	};
 
-	const onEnterPress = e => { if (e.key === 'Enter') onFormSubmit() } ;
+	const onEnterPress = e => { if (e.key === 'Enter') onFormSubmit() };
 
 	/* effects */
 	useEffect(() => {
