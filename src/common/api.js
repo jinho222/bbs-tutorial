@@ -20,7 +20,7 @@ class Api {
 					'Content-Type': 'multipart/form-data',
 				},
 			},
-			timeout: 8000,
+			timeout: 15000,
 		}).then(({ data }) => data)
 			.catch(err => Promise.reject(err));
 	}

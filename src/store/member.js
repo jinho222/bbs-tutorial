@@ -22,7 +22,7 @@ export const logout = createAsyncThunk(
 const initialState = {
 	basicInfo: {},
 	isLoading: false,
-	isError: false,
+	error: null,
 }
 
 // 새로고침시 세션 정보를 가져오는 함수
@@ -47,35 +47,35 @@ const memberSlice = createSlice({
 		builder
 		.addCase(login.pending, (state, action) => {
 			state.isLoading = true;
-			state.isError = false;
+			state.error = null;
 		})
 		.addCase(login.fulfilled, (state, action) => {
 			state.basicInfo = action.payload;
 			state.isLoading = false;
-			state.isError = false;
+			state.error = null;
 
 			/* sessionStorage */
 			sessionStorage.setItem('basicInfo', JSON.stringify(state.basicInfo));
 		})
 		.addCase(login.rejected, (state, action) => {
 			state.isLoading = false;
-			state.isError = true;
+			state.error = action.payload;
 		})
 		.addCase(logout.pending, (state, action) => {
 			state.isLoading = true;
-			state.isError = false;
+			state.error = null;
 		})
 		.addCase(logout.fulfilled, (state, action) => {
 			state.basicInfo = {};
 			state.isLoading = false;
-			state.isError = false;
+			state.error = null;
 			
 			/* sessionStorage */
 			sessionStorage.removeItem('basicInfo');
 		})
 		.addCase(logout.rejected, (state, action) => {
 			state.isLoading = false;
-			state.isError = true;
+			state.error = action.payload;
 		})
 	}
 });

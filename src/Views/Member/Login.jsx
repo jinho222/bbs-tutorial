@@ -8,7 +8,11 @@ import { login } from "../../store/member";
 const Login = () => {	
 	/* hooks */
 	const history = useHistory();
-	const { basicInfo, isLoading, isError } = useSelector(state => state.member);
+	const {
+		basicInfo,
+		isLoading,
+		error
+	} = useSelector(state => state.member);
 	const dispatch = useDispatch();
 	
 	/* status */
@@ -56,13 +60,13 @@ const Login = () => {
 	/* effect */
 	useEffect(() => {
 		if (!isLoading) {
-			if (isError) {
+			if (error) {
 				alert('아이디 또는 비밀번호가 잘못되었습니다.\n다시 시도해주세요.');
 			} else if (Object.keys(basicInfo).length > 0) { // 로그인 성공시
 				history.push('/')
 			}
 		}
-	}, [basicInfo, isLoading, isError, history]);
+	}, [basicInfo, isLoading, error, history]);
 
 	/* template */
 	return (
