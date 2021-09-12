@@ -1,5 +1,7 @@
+# BBS
 * FE: React + Redux-thunk
 * BE: Express.js + MongoDB [backend github](https://github.com/jinho222/bbs-server).
+* Deploy: [https://bbs-tutorial.netlify.app](https://bbs-tutorial.netlify.app)
 
 ## 설명
 프론트엔드와 백엔드를 각각 분리해서 만든 게시판 프로젝트입니다.<br />
