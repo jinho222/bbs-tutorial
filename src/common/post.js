@@ -1,6 +1,6 @@
 import Api from "./api";
 
-class Post extends Api {
+export default class Post extends Api {
 	// eslint-disable-next-line
 	constructor() {
 		super();
@@ -27,5 +27,3 @@ class Post extends Api {
 	}
 
 }
-
-export default Post;

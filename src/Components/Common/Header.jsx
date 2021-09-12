@@ -21,7 +21,7 @@ export default function Header() {
 	const checkActive = params => location.pathname === params ? 'active' : '';
 
 	return (
-		<nav className="navbar navbar-expand-md navbar-dark bg-primary">
+		<nav className="navbar navbar-expand-sm navbar-dark bg-dark">
 			<div className="container-fluid">
 				<h1 className="d-flex">
 					<Link className="navbar-brand" to="/">BBS</Link>

@@ -1,6 +1,6 @@
 import Api from "./api";
 
-class Member extends Api {
+export default class Member extends Api {
 	// eslint-disable-next-line
 	constructor() {
 		super();
@@ -18,5 +18,3 @@ class Member extends Api {
 		return await this.requestPost('/member/logout', params);
 	}
 }
-
-export default Member;	
