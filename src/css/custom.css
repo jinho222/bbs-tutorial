@@ -1,0 +1,67 @@
+.password_secret {
+	position: absolute;
+	top: 50%;
+	right: 10px;
+	transform: translateY(-50%);
+	cursor: pointer;
+}
+.table tr th:first-of-type {
+	text-align: center;
+}
+.pagination .page-item {
+	cursor: pointer;
+}
+.board-write-textarea {
+	resize: none;
+	height: 250px;
+}
+.input-error {
+	border-color: #dc3545 !important; 
+	box-shadow: 0 0 0 0.25rem #dc354525 !important;
+}
+.input-error-msg {
+	color: #dc3545;
+	font-weight: 500;
+}
+.btn-write {
+	position: absolute;
+	top: 50%;
+	right: 0;
+	transform: translateY(-50%);
+}
+.board-list-title {
+	cursor: pointer;
+}
+.board-list-title:hover {
+	text-decoration: underline;
+	color: #666;
+}
+.board-list-title > span {
+	display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+}
+.spinner-bg {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	z-index: 10;
+	display: flex;
+}
+.spinner-bg.spinner-bg-dark {
+	background-color: rgba(0, 0, 0, .7);
+}
+.spinner {
+	margin: auto;
+}
+.spinner .spinner-border {
+	width: 100px;
+	height: 100px;
+	border-width: 15px;
+}
+.post-content {
+	border-top: 1px solid #666;
+}

@@ -21,3 +21,8 @@ a {
 	text-decoration: none;
 	color: #000;
 }
+pre {
+	font-family: "IBM Plex Sans KR", sans-serif;
+	word-break: keep-all;
+	white-space: break-spaces;
+}
