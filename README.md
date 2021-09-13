@@ -23,9 +23,29 @@ CORS 이슈, 백단에서 비동기 코드가 어떻게 돌아가는지, MVC패�
 하여 cookie로 처리하려던 부분들을 jwt token을 사용하도록 모두 변경하였습니다.\
 비록 시간도 오래 걸리고, 스트레스도 많이 받았지만, 보안 관련 정책이나 jwt token 처리 방식에 대해 알 수 있었던 좋은 경험이었습니다.
 ## 화면
+초기 화면은 다음과 같습니다.\
+\
 <img src="https://github.com/jinho222/images/blob/main/bbs/1.png" width="600">\
+\
+아래 두 사진처럼 회원가입과 로그인시 validation 체크를 해줍니다.\
+\
 <img src="https://github.com/jinho222/images/blob/main/bbs/2.png" width="600">\
+\
 <img src="https://github.com/jinho222/images/blob/main/bbs/3.png" width="600">\
+\
+게시판 페이지에 db에 저장된 글들을 화면에 보여줍니다.\
+\
 <img src="https://github.com/jinho222/images/blob/main/bbs/4.png" width="600">\
+\
+페이지네이션 기능도 직접 구현하였습니다.\
+(사진에 작성자나 날짜가 없는 글들이 있는데, db 필드가 추가되기 이전에 만들었던 글들입니다.)\
+\
 <img src="https://github.com/jinho222/images/blob/main/bbs/5.png" width="600">\
+\
+글쓰기 버튼을 누르면 사진처럼 제목과 내용을 입력가능합니다.\
+\
 <img src="https://github.com/jinho222/images/blob/main/bbs/6.png" width="600">\
+\
+글 상세페이지는 다음과 같으며, 같은 계정으로 작성된 글들은 수정 및 삭제가 가능합니다.\
+\
+<img src="https://github.com/jinho222/images/blob/main/bbs/7.png" width="600">\
