@@ -23,3 +23,9 @@ CORS 이슈, 백단에서 비동기 코드가 어떻게 돌아가는지, MVC패�
 하여 cookie로 처리하려던 부분들을 jwt token을 사용하도록 모두 변경하였습니다.\
 비록 시간도 오래 걸리고, 스트레스도 많이 받았지만, 보안 관련 정책이나 jwt token 처리 방식에 대해 알 수 있었던 좋은 경험이었습니다.
 ## 화면
+<img src="https://github.com/jinho222/images/blob/main/bbs/1.png" width="600">\
+<img src="https://github.com/jinho222/images/blob/main/bbs/2.png" width="600">\
+<img src="https://github.com/jinho222/images/blob/main/bbs/3.png" width="600">\
+<img src="https://github.com/jinho222/images/blob/main/bbs/4.png" width="600">\
+<img src="https://github.com/jinho222/images/blob/main/bbs/5.png" width="600">\
+<img src="https://github.com/jinho222/images/blob/main/bbs/6.png" width="600">\
