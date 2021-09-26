@@ -48,4 +48,4 @@ CORS 이슈, 백단에서 비동기 코드가 어떻게 돌아가는지, MVC패�
 \
 글 상세페이지는 다음과 같으며, 같은 계정으로 작성된 글들은 수정 및 삭제가 가능합니다.\
 \
-<img src="https://github.com/jinho222/images/blob/main/bbs/7.png" width="600">\
+<img src="https://github.com/jinho222/images/blob/main/bbs/7.png" width="600">
